@@ -1,0 +1,28 @@
+-- basic bullet script
+-- TODO: add homing & explosion settings
+
+go.property("speed", 400.0)
+go.property("dir", vmath.vector3(0, 1, 0))
+go.property("lifetime", 10)
+go.property("side", hash("player"))
+
+local window_border = 50
+
+function init(self)
+end
+
+function update(self, dt)
+	local pos = go.get_position()
+	go.set_position(pos + self.dir * self.speed * dt)
+
+	self.lifetime = self.lifetime - dt
+	if self.lifetime < 0 then
+		go.delete()
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+end

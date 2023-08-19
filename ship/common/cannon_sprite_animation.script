@@ -1,0 +1,8 @@
+-- script that makes a cannon play an animation on shooting
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("animate") then
+		sprite.play_flipbook("#sprite", hash("cannon_fire"),
+		function() sprite.play_flipbook("#sprite", hash("cannon")) end)
+	end
+end

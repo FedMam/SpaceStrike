@@ -1,0 +1,30 @@
+-- script that makes a random cannon of the ship
+-- shoot every 'delay' seconds.
+-- if no_repeat set to true, no cannon
+-- can shoot 2 times in a row.
+
+go.property("delay", 0.3)
+go.property("initial_ctr", 0.25)
+go.property("cannon_count", 5)
+go.property("no_repeat", true)
+
+function init(self)
+	math.randomseed(os.time())
+	self.counter = self.initial_ctr
+	self.prev_cannon = -1
+end
+
+function update(self, dt)
+	self.counter = self.counter - dt
+	if self.counter <= 0.0 then
+		self.counter = self.initial_ctr
+		local cannon_num = math.random(1, self.cannon_count)
+		if self.no_repeat then
+			while cannon_num == self.prev_cannon do
+				cannon_num = math.random(1, self.cannon_count)
+			end
+		end
+		msg.post("cannon_" .. cannon_num .. "#fire_script", hash("fire"))
+		self.prev_cannon = cannon_num
+	end
+end

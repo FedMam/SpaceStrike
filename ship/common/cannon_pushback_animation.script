@@ -1,0 +1,28 @@
+-- script that makes a cannon push back a little when shooting
+
+go.property("range", 16)
+go.property("pushback_duration", 0.02)
+go.property("return_duration", 0.08)
+
+function init(self)
+end
+
+function final(self)
+end
+
+function update(self, dt)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("animate") then
+		self.initial_y = go.get_position().y
+		-- push back the cannon
+		go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD,
+		self.initial_y - self.range, go.EASING_OUTBACK, self.pushback_duration, 0,
+		function()
+			-- return to its normal place
+			go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD,
+			self.initial_y, go.EASING_INOUTSINE, self.return_duration, 0)
+		end)
+	end
+end

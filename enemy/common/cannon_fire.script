@@ -1,0 +1,25 @@
+-- enemy cannon fire script (with atlas support)
+go.property("bullet_size", 0.5)
+go.property("has_animation_script", true)
+go.property("atlas", resource.atlas())
+
+function init(self)
+end
+
+function final(self)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("fire") then
+		local bullet = factory.create("#shooter", nil, nil,
+		{dir = vmath.rotate(go.get_world_rotation(), vmath.vector3(0, 1, 0))},
+		self.bullet_size)
+		-- adjust the bullet position so it renders behind the cannon a bit
+		go.set_position(go.get_position(bullet) + vmath.vector3(0, 0, -0.01), bullet)
+		-- change the graphics of the bullet
+		go.set(msg.url(nil, bullet, "sprite"), "image", self.atlas)
+		if self.has_animation_script then
+			msg.post("#animation_script", hash("animate"))
+		end
+	end
+end
