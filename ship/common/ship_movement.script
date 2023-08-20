@@ -10,7 +10,7 @@ go.property("wnd_height", 1136)
 go.property("relative", true)
 
 go.property("actual_pos", vmath.vector3())
-go.property("shift_pos", vmath.vector3())
+go.property("swinging_pos", vmath.vector3())
 go.property("swinging_range", 12)
 go.property("swinging_duration", 2)
 
@@ -24,8 +24,8 @@ function init(self)
 	self.target = pos
 
 	-- 'swinging' animation
-	go.set("#", "shift_pos.y", -self.swinging_range / 2)
-	go.animate("#", "shift_pos.y", go.PLAYBACK_LOOP_PINGPONG,
+	go.set("#", "swinging_pos.y", -self.swinging_range / 2)
+	go.animate("#", "swinging_pos.y", go.PLAYBACK_LOOP_PINGPONG,
 	self.swinging_range / 2, go.EASING_INOUTSINE, self.swinging_duration)
 end
 
@@ -42,7 +42,7 @@ function update(self, dt)
 		
 		self.actual_pos = pos + dpos
 	end
-	go.set_position(self.actual_pos + self.shift_pos)
+	go.set_position(self.actual_pos + self.swinging_pos)
 end
 
 function on_input(self, action_id, action)

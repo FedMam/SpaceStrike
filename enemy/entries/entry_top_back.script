@@ -1,0 +1,17 @@
+gcst = require("modules.global_constants")
+
+go.property("target_pos", vmath.vector3())
+go.property("object_size", 50)
+go.property("duration", 2)
+
+function on_message(self, message_id, message)
+	if message_id == hash("play_entry") then
+		go.set("#movement", "actual_pos.x", self.target_pos.x)
+		go.set("#movement", "actual_pos.y", gcst.wnd_height + self.object_size + 50)
+		go.animate("#movement", "actual_pos.y", go.PLAYBACK_ONCE_FORWARD,
+		self.target_pos.y, go.EASING_OUTBACK, self.duration, 0,
+		function()
+			msg.post("#controller", hash("entry_finished"))
+		end)
+	end
+end

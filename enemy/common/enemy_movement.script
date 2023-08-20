@@ -1,0 +1,24 @@
+go.property("actual_pos", vmath.vector3())
+go.property("swinging_pos", vmath.vector3())
+go.property("swinging_range", 12)
+go.property("swinging_duration", 2)
+go.property("swinging_plusminus", 0.5)
+
+go.property("entry", 0)
+
+function init(self)
+	local pos = go.get_position()
+	self.actual_pos.x = pos.x
+	self.actual_pos.y = pos.y
+	
+	-- 'swinging' animation
+	self.swinging_duration = self.swinging_duration + 
+	(math.random() - 0.5) * 2 * self.swinging_plusminus
+	go.set("#", "swinging_pos.y", -self.swinging_range / 2)
+	go.animate("#", "swinging_pos.y", go.PLAYBACK_LOOP_PINGPONG,
+	self.swinging_range / 2, go.EASING_INOUTSINE, self.swinging_duration)
+end
+
+function update(self, dt)
+	go.set_position(self.actual_pos + self.swinging_pos)
+end

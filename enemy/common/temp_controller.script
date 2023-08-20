@@ -1,0 +1,13 @@
+go.property("shoot_duration", 0.5)
+
+function init(self)
+	go.set("#entry", "target_pos", go.get_position())
+	msg.post("#entry", hash("play_entry"))
+end
+
+function on_message(self, message_id, message)
+	if message_id == hash("entry_finished") then
+		timer.delay(self.shoot_duration, true, 
+		function() msg.post("cannon#fire_script", hash("fire")) end)
+	end
+end
