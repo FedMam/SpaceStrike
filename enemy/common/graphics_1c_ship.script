@@ -1,13 +1,17 @@
+go.property("active", false)
 go.property("atlas", resource.atlas())
 
 local function render(self)
 	go.set("#sprite", "image", self.atlas)
 	go.set("cannon#sprite", "image", self.atlas)
+	go.set("cannon#fire_script", "custom_graphics", true)
 	go.set("cannon#fire_script", "atlas", self.atlas)
 end
 
 function init(self)
-	render(self)
+	if self.active then
+		render(self)
+	end
 end
 
 function on_message(self, message_id, message)

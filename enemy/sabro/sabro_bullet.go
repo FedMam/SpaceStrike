@@ -26,7 +26,7 @@ components {
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "tile_set: \"/assets/enemies/sabro/sabroA.atlas\"\n"
+  data: "tile_set: \"/assets/enemies/sabro/sabro_A.atlas\"\n"
   "default_animation: \"bullet\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "blend_mode: BLEND_MODE_ALPHA\n"

@@ -33,6 +33,22 @@ collection_instances {
     z: 1.0
     w: 6.123234E-17
   }
+  instance_properties {
+    id: "body"
+    properties {
+      id: "graphics"
+      properties {
+        id: "active"
+        value: "true"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+      properties {
+        id: "atlas"
+        value: "/assets/enemies/sabro/sabro_B.atlas"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
   scale3 {
     x: 1.0
     y: 1.0
@@ -72,6 +88,22 @@ collection_instances {
     y: 0.0
     z: 1.0
     w: 6.123234E-17
+  }
+  instance_properties {
+    id: "body"
+    properties {
+      id: "graphics"
+      properties {
+        id: "active"
+        value: "true"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+      properties {
+        id: "atlas"
+        value: "/assets/enemies/sabro/sabro_D.atlas"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
   }
   scale3 {
     x: 1.0
